@@ -16,22 +16,16 @@ import type {
   OptionalIdConfiguration,
 } from "@google-labs/breadboard";
 
-import headTail, { HeadTailInputs, HeadTailOutputs } from "./nodes/head.js";
-import take, { TakeInputs, TakeOutputs } from "./nodes/take.js";
-import drop, { DropInputs, DropOutputs } from "./nodes/drop.js";
-import undefinedGuard, { GuardInputs, GuardOutputs } from "./nodes/undefinedGuard.js";
+import pipeline, { PipelineInputs, PipelineOutputs } from "./nodes/pipeline.js";
 
 const coreHandlers = {
-  drop,
-  headTail,
-  take,
-  undefinedGuard
+  pipeline
 };
 
 /**
  * Syntactic sugar around the `coreHandlers` library.
  */
-export class Utils implements Kit {
+export class TransformersJS implements Kit {
   url = "npm:@paulkinlan/breadboard-utils-kit";
   #nodeFactory: NodeFactory;
   #handlers: NodeHandlers;
@@ -45,35 +39,13 @@ export class Utils implements Kit {
     this.#handlers = coreHandlers;
   }
 
-  drop<In = DropInputs, Out = DropOutputs>(
+  pipeline<In = PipelineInputs, Out = PipelineOutputs>(
     config: OptionalIdConfiguration = {}
   ): BreadboardNode<In, Out> {
     const { $id, ...rest } = config;
-    return this.#nodeFactory.create("drop", { ...rest }, $id);
-  }
-
-  headTail<In = HeadTailInputs, Out = HeadTailOutputs>(
-    config: OptionalIdConfiguration = {}
-  ): BreadboardNode<In, Out> {
-    const { $id, ...rest } = config;
-    return this.#nodeFactory.create("headTail", { ...rest }, $id);
-  }
-
-  take<In = TakeInputs, Out = TakeOutputs>(
-    config: OptionalIdConfiguration = {}
-  ): BreadboardNode<In, Out> {
-    const { $id, ...rest } = config;
-    return this.#nodeFactory.create("take", { ...rest }, $id);
-  }
-
-  undefinedGuard<In = GuardInputs, Out = GuardOutputs>(config: OptionalIdConfiguration = {}
-  ): BreadboardNode<In, Out> {
-    const { $id, ...rest } = config;
-    return this.#nodeFactory.create("undefinedGuard", { ...rest }, $id);
+    return this.#nodeFactory.create("pipeline", { ...rest }, $id);
   }
 }
 
-export type DropNodeType = ReturnType<Utils["drop"]>;
-export type HeadTailNodeType = ReturnType<Utils["headTail"]>;
-export type TakeNodeType = ReturnType<Utils["take"]>;
-export type UndefinedGuardNodeType = ReturnType<Utils["undefinedGuard"]>;
+export type PipelineNodeType = ReturnType<TransformersJS["pipeline"]>;
+export type { PipelineOutputs };

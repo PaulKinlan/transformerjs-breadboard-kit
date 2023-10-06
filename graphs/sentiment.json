@@ -1,0 +1,64 @@
+{
+  "edges": [
+    {
+      "from": "input-text",
+      "to": "pipeline",
+      "out": "input",
+      "in": "input"
+    },
+    {
+      "from": "input-model",
+      "to": "pipeline",
+      "out": "model",
+      "in": "model"
+    },
+    {
+      "from": "input-task",
+      "to": "pipeline",
+      "out": "task",
+      "in": "task"
+    },
+    {
+      "from": "pipeline",
+      "to": "output",
+      "out": "modelOutput",
+      "in": "text"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "pipeline",
+      "type": "pipeline"
+    },
+    {
+      "id": "input-model",
+      "type": "input",
+      "configuration": {
+        "message": "What model do you want to use?"
+      }
+    },
+    {
+      "id": "input-task",
+      "type": "input",
+      "configuration": {
+        "message": "What task do you want to run?"
+      }
+    },
+    {
+      "id": "input-text",
+      "type": "input",
+      "configuration": {
+        "message": "What would you like to get the sentiment of?"
+      }
+    },
+    {
+      "id": "output",
+      "type": "output"
+    }
+  ],
+  "kits": [
+    {
+      "url": "npm:@google-labs/llm-starter"
+    }
+  ]
+}

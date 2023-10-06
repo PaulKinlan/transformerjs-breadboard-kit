@@ -1,7 +1,7 @@
 {
-  "name": "@paulkinlan/breadboard-utils-kit",
+  "name": "@paulkinlan/transformerjs-breadboard-kit",
   "version": "1.1.0",
-  "description": "A Kit with useful nodes for Breadboard.",
+  "description": "A Kit with useful nodes for use with TransformerJS.",
   "main": "./dist/src/index.js",
   "exports": "./dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/paulkinlan/breadboard-utils.git"
+    "url": "https://github.com/paulkinlan/transformerjs-breadboard-kit.git"
   },
   "ava": {
     "files": [
@@ -43,6 +43,7 @@
   "dependencies": {
     "@google-labs/breadboard": "^0.3.1",
     "@google-labs/graph-runner": "^0.2.0",
-    "@google-labs/llm-starter": "^0.1.2"
+    "@google-labs/llm-starter": "^0.1.2",
+    "@xenova/transformers": "^2.6.2"
   }
 }
