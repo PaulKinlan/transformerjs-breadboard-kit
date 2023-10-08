@@ -17,7 +17,7 @@ export type PipelineInputs = InputValues & {
   input: any;
 };
 
-export default async (inputs: InputValues): Promise<OutputValues> => {
+export default async (inputs: InputValues): Promise<PipelineOutputs> => {
   const { task, model, input } = inputs as PipelineInputs;
 
   const pipelineInstance = await pipeline(task, model);
