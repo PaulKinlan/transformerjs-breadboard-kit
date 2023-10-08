@@ -1,0 +1,51 @@
+{
+  "edges": [
+    {
+      "from": "input-text",
+      "to": "sentiment",
+      "out": "input",
+      "in": "input"
+    },
+    {
+      "from": "input-model",
+      "to": "sentiment",
+      "out": "model",
+      "in": "model"
+    },
+    {
+      "from": "sentiment",
+      "to": "output",
+      "out": "modelOutput",
+      "in": "text"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "sentiment",
+      "type": "sentiment"
+    },
+    {
+      "id": "input-model",
+      "type": "input",
+      "configuration": {
+        "message": "What model do you want to use?"
+      }
+    },
+    {
+      "id": "input-text",
+      "type": "input",
+      "configuration": {
+        "message": "What would you like to get the sentiment of?"
+      }
+    },
+    {
+      "id": "output",
+      "type": "output"
+    }
+  ],
+  "kits": [
+    {
+      "url": "npm:@google-labs/llm-starter"
+    }
+  ]
+}
