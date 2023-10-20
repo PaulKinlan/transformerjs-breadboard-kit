@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { InputValues, OutputValues } from "@google-labs/graph-runner";
-import { Pipeline, pipeline } from "@xenova/transformers";
+import { InputValues, OutputValues } from "@google-labs/breadboard";
+import { pipeline } from "@xenova/transformers";
 
 export type PipelineOutputs = OutputValues & {
   modelOutput: any | any[];

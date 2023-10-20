@@ -4,13 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {
-  NodeHandlers
-} from "@google-labs/graph-runner";
 import type {
   BreadboardNode,
   Kit,
   NodeFactory,
+  NodeHandlers,
   OptionalIdConfiguration,
 } from "@google-labs/breadboard";
 
@@ -28,7 +26,7 @@ const coreHandlers = {
  * Syntactic sugar around the `coreHandlers` library.
  */
 export class TransformersJS implements Kit {
-  url = "npm:@paulkinlan/breadboard-utils-kit";
+  url = "npm:@paulkinlan/transformerjs-breadboard-kit";
   #nodeFactory: NodeFactory;
   #handlers: NodeHandlers;
 
@@ -45,21 +43,21 @@ export class TransformersJS implements Kit {
     config: OptionalIdConfiguration = {}
   ): BreadboardNode<In, Out> {
     const { $id, ...rest } = config;
-    return this.#nodeFactory.create("pipeline", { ...rest }, $id);
+    return this.#nodeFactory.create(this, "pipeline", { ...rest }, $id);
   }
 
   sentiment<In = SentimentAnalysisInputs, Out = SentimentAnalysisOutputs>(
     config: OptionalIdConfiguration = {}
   ): BreadboardNode<In, Out> {
     const { $id, ...rest } = config;
-    return this.#nodeFactory.create("sentiment", { ...rest }, $id);
+    return this.#nodeFactory.create(this, "sentiment", { ...rest }, $id);
   }
 
   summarize<In = SummarizeInputs, Out = SummarizeOutputs>(
     config: OptionalIdConfiguration = {}
   ): BreadboardNode<In, Out> {
     const { $id, ...rest } = config;
-    return this.#nodeFactory.create("summarize", { ...rest }, $id);
+    return this.#nodeFactory.create(this, "summarize", { ...rest }, $id);
   }
 }
 

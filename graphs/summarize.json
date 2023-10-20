@@ -45,7 +45,7 @@
   ],
   "kits": [
     {
-      "url": "npm:@google-labs/llm-starter"
+      "url": "npm:@paulkinlan/transformersjs-breadboard-kit"
     }
   ]
 }

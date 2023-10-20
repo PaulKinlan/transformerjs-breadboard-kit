@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { InputValues, OutputValues } from "@google-labs/graph-runner";
+import { InputValues, OutputValues } from "@google-labs/breadboard";
 import pipelineNode from "./pipeline.js";
 
 export type SentimentAnalysisOutputs = OutputValues & {
