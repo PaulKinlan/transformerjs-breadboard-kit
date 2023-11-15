@@ -3,18 +3,11 @@
  * Copyright 2023 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
+import { KitBuilder } from "@google-labs/breadboard/kits";
 
-import type {
-  BreadboardNode,
-  Kit,
-  NodeFactory,
-  NodeHandlers,
-  OptionalIdConfiguration,
-} from "@google-labs/breadboard";
-
-import pipeline, { PipelineInputs, PipelineOutputs } from "./nodes/pipeline.js";
-import sentiment, { SentimentAnalysisInputs, SentimentAnalysisOutputs } from "./nodes/sentiment.js";
-import summarize, { SummarizeInputs, SummarizeOutputs } from "./nodes/summarize.js";
+import pipeline, { PipelineOutputs } from "./nodes/pipeline.js";
+import sentiment from "./nodes/sentiment.js";
+import summarize from "./nodes/summarize.js";
 
 const coreHandlers = {
   pipeline,
@@ -25,44 +18,20 @@ const coreHandlers = {
 /**
  * Syntactic sugar around the `coreHandlers` library.
  */
-export class TransformersJS implements Kit {
-  url = "npm:@paulkinlan/transformerjs-breadboard-kit";
-  #nodeFactory: NodeFactory;
-  #handlers: NodeHandlers;
 
-  get handlers() {
-    return this.#handlers;
-  }
+const TransformersJS = new KitBuilder({
+  url: "npm:@paulkinlan/transformerjs-breadboard-kit",
+  title: "TransformersJS",
+  description: "A set of nodes for using TransformersJS",
+  version: "0.0.1",
+}).build(coreHandlers);
 
-  constructor(nodeFactory: NodeFactory) {
-    this.#nodeFactory = nodeFactory;
-    this.#handlers = coreHandlers;
-  }
+export default TransformersJS;
+export { TransformersJS }
 
-  pipeline<In = PipelineInputs, Out = PipelineOutputs>(
-    config: OptionalIdConfiguration = {}
-  ): BreadboardNode<In, Out> {
-    const { $id, ...rest } = config;
-    return this.#nodeFactory.create(this, "pipeline", { ...rest }, $id);
-  }
-
-  sentiment<In = SentimentAnalysisInputs, Out = SentimentAnalysisOutputs>(
-    config: OptionalIdConfiguration = {}
-  ): BreadboardNode<In, Out> {
-    const { $id, ...rest } = config;
-    return this.#nodeFactory.create(this, "sentiment", { ...rest }, $id);
-  }
-
-  summarize<In = SummarizeInputs, Out = SummarizeOutputs>(
-    config: OptionalIdConfiguration = {}
-  ): BreadboardNode<In, Out> {
-    const { $id, ...rest } = config;
-    return this.#nodeFactory.create(this, "summarize", { ...rest }, $id);
-  }
-}
-
-export type PipelineNodeType = ReturnType<TransformersJS["pipeline"]>;
-export type SummarizeNodeType = ReturnType<TransformersJS["summarize"]>;
-export type SentimentAnalysisNodeType = ReturnType<TransformersJS["sentiment"]>;
-
+export type PipelineNodeType = ReturnType<typeof pipeline>;
+export type SummarizeNodeType = ReturnType<typeof summarize>;
+export type SentimentAnalysisNodeType = ReturnType<typeof sentiment>;
 export type { PipelineOutputs };
+export type MyKit = InstanceType<typeof TransformersJS>;
+
