@@ -19,7 +19,5 @@ export type SummarizeInputs = InputValues & {
 export default async (inputs: InputValues): Promise<SummarizeOutputs> => {
   const { model, input } = inputs as SummarizeInputs;
 
-  const result = pipelineNode({ task: "summarization", model, input });
-
-  return result;
+  return await pipelineNode({ task: "summarization", model, input });
 };

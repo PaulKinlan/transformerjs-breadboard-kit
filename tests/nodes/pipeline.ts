@@ -1,7 +1,7 @@
 import { Board, asRuntimeKit } from "@google-labs/breadboard";
 import path from "path";
 import test from "ava";
-import { TransformersJS } from "@paulkinlan/transformerjs-breadboard-kit";
+import { TransformersJSKit } from "@paulkinlan/transformerjs-breadboard-kit";
 import { pathToFileURL } from "url";
 
 test("sentiment-analysis pipeline", async (t) => {
@@ -15,7 +15,7 @@ test("sentiment-analysis pipeline", async (t) => {
       task: "sentiment-analysis",
       input: "Cars the movie is great!!",
     },
-    { kits: [asRuntimeKit(TransformersJS)] }
+    { kits: [asRuntimeKit(TransformersJSKit)] }
   );
 
   t.is((<any>result["text"])[0].label, "POSITIVE");

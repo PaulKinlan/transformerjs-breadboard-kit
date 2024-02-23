@@ -16,7 +16,9 @@ export type SentimentAnalysisInputs = InputValues & {
   input: any;
 };
 
-export default async (inputs: InputValues): Promise<SentimentAnalysisOutputs> => {
+export default async (
+  inputs: InputValues
+): Promise<SentimentAnalysisOutputs> => {
   const { model, input } = inputs as SentimentAnalysisInputs;
 
   return await pipelineNode({ task: "sentiment-analysis", model, input });

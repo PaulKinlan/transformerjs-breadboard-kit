@@ -5,7 +5,7 @@
  */
 
 import { InputValues, OutputValues } from "@google-labs/breadboard";
-import { pipeline } from "@xenova/transformers";
+import { Pipeline, pipeline, PipelineType } from "@xenova/transformers";
 
 export type PipelineOutputs = OutputValues & {
   modelOutput: any | any[];
@@ -19,8 +19,9 @@ export type PipelineInputs = InputValues & {
 
 export default async (inputs: InputValues): Promise<PipelineOutputs> => {
   const { task, model, input } = inputs as PipelineInputs;
+  const taskType: PipelineType = task as PipelineType;
 
-  const pipelineInstance = await pipeline(task, model);
+  const pipelineInstance = (await pipeline(taskType, model)) as Pipeline;
 
-  return { modelOutput: await pipelineInstance(input) }
+  return { modelOutput: await pipelineInstance(input, {}) };
 };
